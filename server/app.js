@@ -9,6 +9,13 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const path = require('path');
 
+var corsOptions ={
+  "origin": "http://localhost:3000",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+
 dotenv.config({
     path:"./.env"
 });
@@ -34,12 +41,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
-var corsOptions ={
-  "origin": "http://localhost:3000",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
-}
+
 const location = path.join(__dirname,"./public");
 app.use(express.static(location));
 
